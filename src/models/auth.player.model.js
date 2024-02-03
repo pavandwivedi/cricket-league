@@ -49,6 +49,7 @@ const authPlayerSchema = new mongoose.Schema({
   worldRecord: { type: Number, default: 0 },
   countryRecord: { type: Number, default: 0 },
   winStreak: { type: Number, default: 0 },
+  weeklyWinningCoins:{type:Number,default:0},
 
 }, 
 { timestamps: true }

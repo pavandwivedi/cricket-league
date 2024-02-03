@@ -13,7 +13,7 @@ import { countAndStoreDetails } from "../services/generateGift.js";
 export async function guestLoginController(req,res){
     const{deviceId,country} = req.body;
     try {
-        const existingUser = await authPlayerModel.findOne({deviceId});
+        const existingUser = await guestPlayerModel.findOne({deviceId});
         if(!existingUser){
             const {playerUUID, username} = await generatePlayerInfo("guest");
             const user = new guestPlayerModel({deviceId,username,userId:playerUUID,country});           
@@ -428,7 +428,7 @@ export async function guestUpdateController(req, res) {
   
 
   try {
-    const tourInfo =  await searchTour(tourName);
+    const tourInfo =   searchTour(tourName);
     console.log(tourInfo);
     if (!tourInfo) {
       return res.status(404).json({ error: 'Tour info not found' });
@@ -450,14 +450,16 @@ export async function guestUpdateController(req, res) {
     if (isWinner) {
       // If the player is the winner, increment the wins field
       updateFields.$inc.wins = 1;
-      updateFields.$inc.coinsEarned= tourInfo[0].entryFee|| 0;
       updateFields.$inc.coins=tourInfo[0].entryFee|| 0;
+      updateFields.$inc.weeklyWinningCoins=2*(tourInfo[0].entryFee|| 0);
       
     }
     else{
-      updateFields.$inc.coinsEarned = -tourInfo[0].entryFee|| 0;
+      
       updateFields.$inc.coins= -tourInfo[0].entryFee|| 0;
     }
+
+    
 
     const player = await guestPlayerModel.findByIdAndUpdate(userId, updateFields, { new: true });
 

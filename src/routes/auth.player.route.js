@@ -15,4 +15,5 @@ authPlayerRouter.put('/levelupbowler',checkUserLogin,bowlerLevelUpController);
 authPlayerRouter.get('/getbowlers',checkUserLogin,getBowlerController);
 authPlayerRouter.post('/insertballs',checkUserLogin,addBallsController);
 authPlayerRouter.post('/insertbats',checkUserLogin,addBatsController);
+
 export default authPlayerRouter;

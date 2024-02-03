@@ -43,22 +43,20 @@ const guestPlayerSchema = new mongoose.Schema({
   bats:[batsSchema],
   giftPacks:[packSchema],
   /*tours:[{tourSchema}],*/
- 
 
   wins: { type: Number, default: 0 },
   sixesScored: { type: Number, default: 0 },
-  totalWickets: { type: Number, default: 0 },
-  coinsEarned: { type: Number, default: 0 },
+  totalWickets: { type: Number, default: 0 }, 
   totalMatches: { type: Number, default: 0 },
   winRate: { type: Number, default: 0 },
   worldRecord: { type: Number, default: 0 },
   countryRecord: { type: Number, default: 0 },
   winStreak: { type: Number, default: 0 },
-
+  weeklyWinningCoins:{type:Number,default:0},
 }, 
-{ timestamps: true }
+{ timestamps: true,
+ }
 );
-
 const guestPlayerModel = mongoose.model('guestPlayer', guestPlayerSchema);
 
 export default guestPlayerModel;
